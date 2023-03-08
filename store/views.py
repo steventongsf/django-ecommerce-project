@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 
 from category.models import Category
 
-from .models import Product
+from store.models import Product
 
 # Create your views here.
 def store(request, category_slug=None):
