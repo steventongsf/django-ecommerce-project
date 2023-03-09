@@ -19,7 +19,15 @@ App consists of:
 # Features:
 Coming soon
 
+# Issues
+* Product instances are not populating variations using custom models.Manager.  Currently, getting data explicitly.
 
+# TODOs
+When features are complete:
+* Migrate to Postgres
+* Enable caching
+* Refactor assets for deployment to CDN
+* Refactor login to use vendor authentication
 
 
 

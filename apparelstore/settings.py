@@ -55,6 +55,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'apparelstore.urls'
 
+# context processors run each time a template is rendered
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
