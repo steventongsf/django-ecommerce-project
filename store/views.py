@@ -7,6 +7,7 @@ from carts.views import _cart_id
 from category.models import Category
 
 from store.models import Product, Variation, VariationManager
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 # Create your views here.
 def store(request, category_slug=None):
@@ -14,17 +15,23 @@ def store(request, category_slug=None):
     products = None
     links = Category.objects.all()
     # fetch data from database, create context and pass to template
-    print("request")
     if category_slug is not None:
         print("category_slug: ", category_slug)
         categories = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(category=categories, is_available=True)
+        products = Product.objects.filter(category=categories, is_available=True).order_by('id')
+        paginator = Paginator(products, 4)
+        page = request.GET.get("page")
+        # get page parameter
+        paged_products = paginator.get_page(page)
         product_count = products.count()
     else:
-        products = Product.objects.all().filter(is_available=True)
+        products = Product.objects.all().filter(is_available=True).order_by('id')
+        paginator = Paginator(products, 4)
+        page = request.GET.get("page")
+        paged_products = paginator.get_page(page)
         product_count = products.count()
     context = {
-        "products": products,
+        "products": paged_products,
         "links": links, 
         "product_count": product_count,
     }

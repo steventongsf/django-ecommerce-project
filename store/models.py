@@ -17,9 +17,7 @@ class Product(models.Model):
 
     def get_url(self):
         url = reverse('product-detail', args=[self.category.slug, self.slug])
-        print("url: ",url)
         return url
-        #return "./product-detail"
 
     def __str__(self):
         return self.product_name
